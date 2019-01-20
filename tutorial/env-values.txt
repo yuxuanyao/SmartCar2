@@ -1,0 +1,4 @@
+export REACT_APP_CLIENT_ID=a429175f-fba9-4827-9b38-a168c3b057b7
+export REACT_APP_REDIRECT_URI=https://javascript-sdk.smartcar.com/redirect-2.0.0?app_origin=http://localhost:3000
+export REACT_APP_SERVER=http://localhost:8000
+
