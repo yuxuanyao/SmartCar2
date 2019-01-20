@@ -5,10 +5,16 @@ const ethers = require('ethers')
 
 const abi = require('../../../EtherRide/foo/build/contracts/CounterApp.json').abi
 
-let provider = new ethers.providers.JsonRpcProvider('http://localhost:8545', 'undefined')
+let provider = new ethers.providers.JsonRpcProvider('http://localhost:8545', 'unspecified')
 
-let contract = new ethers.Contract('0xc1f4085e8a1eccdcf198f40762469e6bbb4dae52', abi, provider)
+let contract = new ethers.Contract('0xc7d453d31ac839088ea3cda6ea6a22d8758ae478', abi, provider)
 
-contract.on('UnlockCar', () => { return axios.post(`http://localhost:8000/unlock`); })
+contract.on('UnlockCar', () => {
+    console.log("rip");
+    return axios.post(`http://localhost:8000/unlock`);
+})
 
-contract.on('LockCar', () => { return axios.post(`http://localhost:8000/lock`); })
+contract.on('LockCar', () => {
+    console.log("rip");
+    return axios.post(`http://localhost:8000/lock`);
+})

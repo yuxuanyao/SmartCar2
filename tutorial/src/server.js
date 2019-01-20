@@ -1,6 +1,6 @@
 const smartcar = require('smartcar');
 const express = require('express');
-var cors = require('cors');
+const cors = require('cors');
 
 var app = express();
 app.use(cors());
@@ -16,12 +16,12 @@ const client = new smartcar.AuthClient({
 
 var access = '';
 
-app.get('/exchange', function(req, res) {
+app.get('/exchange', function (req, res) {
   const code = req.query.code;
   console.log("code: " + code);
   // TODO: Request Step 1: Obtain an access token
   return client.exchangeCode(code)
-    .then(function(_access) {    
+    .then(function (_access) {
       // in a production app you'll want to store this in some kind of persistent storage
       console.log("access token: ");
       console.log(_access);
@@ -31,20 +31,20 @@ app.get('/exchange', function(req, res) {
     })
 });
 
-app.get('/vehicle', function(req, res) {
+app.get('/vehicle', function (req, res) {
   return smartcar.getVehicleIds(access.accessToken)
-    .then(function(data) {
+    .then(function (data) {
       // the list of vehicle ids
       return data.vehicles;
     })
-    .then(function(vehicleIds) {
+    .then(function (vehicleIds) {
       // instantiate the first vehicle in the vehicle id list
       const vehicle = new smartcar.Vehicle(vehicleIds[0], access.accessToken);
       console.log(vehicle);
       // TODO: Request Step 4: Make a request to Smartcar API
       return vehicle.info();
     })
-    .then(function(info) {
+    .then(function (info) {
       console.log(info);
       // {
       //   "id": "36ab27d0-fd9d-4455-823a-ce30af709ffc",
@@ -56,17 +56,18 @@ app.get('/vehicle', function(req, res) {
     });
 });
 
-app.post('/lock', function(req, res) {
+app.post('/lock', function (req, res) {
   return smartcar.getVehicleIds(access.accessToken)
-    .then(function(data) {
+    .then(function (data) {
       // the list of vehicle ids
       return data.vehicles;
     })
-    .then(function(vehicleIds) {
+    .then(function (vehicleIds) {
       // instantiate the first vehicle in the vehicle id list
       const vehicle = new smartcar.Vehicle(vehicleIds[0], access.accessToken);
-      vehicle.lock().then(function(response) {
-        if(response){
+      console.log(vehicle);
+      vehicle.lock().then(function (response) {
+        if (response) {
           console.log(response);
         }
         else {
@@ -76,17 +77,17 @@ app.post('/lock', function(req, res) {
     });
 });
 
-app.post('/unlock', function(req, res) {
+app.post('/unlock', function (req, res) {
   return smartcar.getVehicleIds(access.accessToken)
-    .then(function(data) {
+    .then(function (data) {
       // the list of vehicle ids
       return data.vehicles;
     })
-    .then(function(vehicleIds) {
+    .then(function (vehicleIds) {
       // instantiate the first vehicle in the vehicle id list
       const vehicle = new smartcar.Vehicle(vehicleIds[0], access.accessToken);
-      vehicle.unlock().then(function(response) {
-        if(response){
+      vehicle.unlock().then(function (response) {
+        if (response) {
           console.log(response);
         }
         else {
