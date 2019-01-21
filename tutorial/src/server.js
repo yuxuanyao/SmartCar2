@@ -18,13 +18,13 @@ var access = '';
 
 app.get('/exchange', function (req, res) {
   const code = req.query.code;
-  console.log("code: " + code);
+  // console.log("code: " + code);
   // TODO: Request Step 1: Obtain an access token
   return client.exchangeCode(code)
     .then(function (_access) {
       // in a production app you'll want to store this in some kind of persistent storage
-      console.log("access token: ");
-      console.log(_access);
+      // console.log("access token: ");
+      // console.log(_access);
       access = _access;
 
       res.sendStatus(200);
@@ -40,12 +40,12 @@ app.get('/vehicle', function (req, res) {
     .then(function (vehicleIds) {
       // instantiate the first vehicle in the vehicle id list
       const vehicle = new smartcar.Vehicle(vehicleIds[0], access.accessToken);
-      console.log(vehicle);
+      // console.log(vehicle);
       // TODO: Request Step 4: Make a request to Smartcar API
       return vehicle.info();
     })
     .then(function (info) {
-      console.log(info);
+      // console.log(info);
       // {
       //   "id": "36ab27d0-fd9d-4455-823a-ce30af709ffc",
       //   "make": "TESLA",
@@ -65,7 +65,7 @@ app.post('/lock', function (req, res) {
     .then(function (vehicleIds) {
       // instantiate the first vehicle in the vehicle id list
       const vehicle = new smartcar.Vehicle(vehicleIds[0], access.accessToken);
-      console.log(vehicle);
+      //console.log(vehicle);
       vehicle.lock().then(function (response) {
         if (response) {
           console.log(response);

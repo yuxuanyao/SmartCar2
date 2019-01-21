@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default ({info}) => (
-  <table>
+export default ({ info }) => (
+  <table style={{ margin: '20px' }}>
     <thead>
       <tr>
         <th>Vehicle ID</th>

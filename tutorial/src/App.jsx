@@ -1,5 +1,5 @@
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import Smartcar from '@smartcar/auth';
 
@@ -45,7 +45,7 @@ class App extends Component {
       .then(res => {
         console.log("res.data ");
         console.log(res.data);
-        this.setState({vehicle: res.data, code: code});
+        this.setState({ vehicle: res.data, code: code });
       });
   }
 
@@ -56,7 +56,7 @@ class App extends Component {
     //   console.log("lock result: ");
     //   console.log(res);
     // })
-    console.log("lock code is "+this.state.code);
+    console.log("lock code is " + this.state.code);
     return axios.post(`${process.env.REACT_APP_SERVER}/lock`);
   }
 
@@ -66,20 +66,36 @@ class App extends Component {
 
   authorize() {
     // TODO: Authorization Step 2a: Launch the authorization flow
-    this.smartcar.openDialog({forcePrompt: true});
+    this.smartcar.openDialog({ forcePrompt: true });
   }
 
   render() {
     // TODO: Request Step 2b: Get vehicle information
+    const btnStyle = {
+      fontSize: '15px',
+      textAlign: 'center',
+      margin: 'auto',
+      width: '50%',
+      padding: '10px',
+      borderRadius: '10px'
+    }
+
+    const containerStyle = {
+      margin: 'auto',
+      width: '20%'
+    }
+
     return (Object.keys(this.state.vehicle).length !== 0 ? (
-      <div>
+      <div style={containerStyle}>
         <Vehicle info={this.state.vehicle} />
-        <button onClick={this.lock}>Lock</button>
-        <button onClick={this.unlock}>Unlock</button>
+        <button style={btnStyle} onClick={this.lock}>Lock</button>
+        <button style={btnStyle} onClick={this.unlock}>Unlock</button>
       </div>
     ) : (
-      <Connect onClick={this.authorize} />
-    ));
+        <div style={containerStyle}>
+          <Connect onClick={this.authorize} />
+        </div>
+      ));
   }
 }
 

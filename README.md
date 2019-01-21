@@ -1,40 +1,15 @@
-This is the starter kit for Javascript SDK with React.
+# EtherRide 
+### - Think AirBnB for cars, using the Ethereum Blockchain
 
-This kit contains a simple web application that displays car information using Smartcar's Javascript SDK and React as the front-end SPA framework.
+#### DevPost: https://devpost.com/software/etherride
+#### This project is split to two git repos as we used boilerplate code from two different API sponsors. Please also visit this page: https://github.com/yuxuanyao/SmartCar2
 
-## Instructions
-Before we get started, create an application on Smartcar's Developer Dashboard to get your API keys.
+#### This project also only worked within the duration of the hackathon as we were provided log in credentials for a Tesla Model S only during UofTHacks VI
 
-**Note:** On the dashboard, you will want to set your `redirect_uri` as `https://javascript-sdk.smartcar.com/redirect-2.0.0?app_origin=http://localhost:3000`.
+### What it Does
+This application allows the user to rent from a list of vehicles that are registered with SmartCar. Through the use of smart contracts from the Aragon Platform, location data and travel patterns are preserved from third-party access. After selecting a car on the landing page, the user can create a transaction using the Ethereum blockchain. When the transaction goes through, the Car would be unlocked through a request to SmartCar API to unlock the door.
 
-Then, we can set these as environment variables -
-```bash
-$ export REACT_APP_CLIENT_ID=<your-client-id>
-$ export REACT_APP_REDIRECT_URI=<your-redirect-uri>
-```
+### This repo 
+This repo allows users to log in to smartCar and processes requests to the SmartCar API. It also includes a testing framework to test if the car physically locks and unlocks. 
 
-Before setting up the client code, make sure to set up the server code. You can use any of our following back-end SDKs -
-* [Node SDK](https://github.com/smartcar/getting-started-node-sdk)
-* [Python SDK](https://github.com/smartcar/getting-started-python-sdk)
-* [Java SDK](https://github.com/smartcar/getting-started-java-sdk)
-
-Follow the setup instructions in the back-end README except for the `redirect_uri`. Make sure the `redirect_uri` environment variable in the back-end directory is the same as the one we have set above.
-
-Now that the server is ready, you can set up the client (the React application).
-
-Set the server `uri` as an environment variable. This should be from your back-end directory and is set to `http://localhost:8000` by default.
-```bash
-$ export REACT_APP_SERVER=<your-server-uri>
-```
-Make sure you have cloned this repo -
-```bash
-$ git clone https://github.com/smartcar/getting-started-javascript-sdk-react.git
-$ cd getting-started-javascript-sdk-react/app
-```
-To install the required dependencies and run this React app -
-```bash
-$ npm install
-$ npm run start
-```
-
-Once your server is up and running, you can authenticate your vehicle at `http://localhost:3000` in your browser. In our current set up, we are using Smartcar's [test mode](https://smartcar.com), so you can log in with any username and password and you will see information of a simulated vehicle.
+Includes a local server of endpoints to act as an adapter to the SmartCar API, which has a centralized authentication service that prevents cross-site scripting and access tokens to be leaked. This allows users to log in to Tesla or the other car brands that SmartCar provides. In addition, we used ethers.js to monitor the transaction at our local address, which then calls the SmartCar methods to physically lock/unlock the car doors.
